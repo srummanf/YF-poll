@@ -16,11 +16,30 @@
     <div class="wrapper">
         <form class="form-signin">
             <h2 class="form-signin-heading">Please login</h2>
-            <input type="email" class="form-control" name="username" placeholder="Email Address" id="email" required=""
-                autofocus="" />
-            <button class="btn btn-lg btn-primary btn-block" type="submit" id="save" onclick="authotp()">Login</button>
+            <!-- <input type="email" class="form-control" name="username" placeholder="Email Address" id="email" required=""
+                autofocus="" /> -->
+            <button class="btn btn-lg btn-primary btn-block" click="authotp()"><a href="https://chgbsifxtupobribzviz.supabase.co/auth/v1/authorize?provider=google">Login</a></button>
         </form>
     </div>
+    <script>
+
+        import { createClient } from '@supabase/supabase-js';
+        const _supabase = createClient('https://chgbsifxtupobribzviz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoZ2JzaWZ4dHVwb2JyaWJ6dml6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc1MjA3MjQsImV4cCI6MTk5MzA5NjcyNH0.NMdoTHmsyUrQsNwN8EUm5srF7NZ8O4uu0_95tsSovhk');
+        
+        async function authotp() {
+            const { data, error } = await _supabase.auth.signInWithOAuth({
+                provider: 'google',
+            })
+        };
+        
+        
+        async function signout() {
+            const { error } = await _supabase.auth.signOut()
+        };
+        
+        
+
+    </script>
     <script src="./app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </body>
